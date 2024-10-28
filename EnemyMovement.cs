@@ -5,7 +5,7 @@ using System.Linq;
 
 public class EnemyMovement : MonoBehaviour
 {
-    [SerializeField] private Transform target; // The base or target position
+    private Transform target; // The base or target position
     [SerializeField] private float speed = 2f; // Movement speed of the enemy
     [SerializeField] private float attackSpeed = 2f; // Time between attacks
     [SerializeField] private float attackRange = 5f; // Aggro range of enemy
@@ -19,6 +19,15 @@ public class EnemyMovement : MonoBehaviour
     void Start()
     {
         currentHealth = maxHealth; // Initialize current health
+        GameObject gameObjectTarget = GameObject.Find("PlayerBase");
+        if (gameObjectTarget != null)
+        {
+            target = gameObjectTarget.transform;
+        }
+        else
+        {
+            Debug.LogWarning("Target GameObject not found!");
+        }
     }
 
     void Update()
