@@ -5,7 +5,8 @@ using UnityEngine;
 public class TowerStats : MonoBehaviour
 {
     [SerializeField] public int maxHealth = 100; // Maximum health of the structure
-   
+    [SerializeField] private int damage = 10;
+
     // Initial cost to build
     [SerializeField] public int woodCost = 10;
     [SerializeField] public int metalCost = 10;
@@ -32,6 +33,15 @@ public class TowerStats : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    void AttackEnemy(GameObject enemy)
+    {
+        EnemyMovement enemyHealth = enemy.GetComponent<EnemyMovement>();
+        if (enemyHealth != null)
+        {
+            enemyHealth.TakeDamage(damage); // Deal damage to the enemy                                    
+        }
+    } 
 
     public void Repair()
     {

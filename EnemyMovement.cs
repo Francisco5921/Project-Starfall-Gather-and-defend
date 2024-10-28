@@ -89,6 +89,19 @@ public class EnemyMovement : MonoBehaviour
         }
     }
 
+    public void TakeDamage(int damageAmount)
+    {
+        currentHealth -= damageAmount;
+        Debug.Log($"{gameObject.name} took {damageAmount} damage. Current health: {currentHealth}");
+
+        // Check if the enemy is below the HP threshold to be destroyed
+        if (currentHealth <= 0)
+        {
+            Destroy(gameObject);
+            GameManager.onEnemyDestroy.Invoke();
+        }
+    }
+
     void HandleAttack()
     {
         attackTimer += Time.deltaTime; // Attacktimer increments over time
